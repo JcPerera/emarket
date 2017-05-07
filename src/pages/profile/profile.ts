@@ -22,12 +22,18 @@ export class ProfilePage {
   private userPostsLists = [];
   private ratingComments = [];
   private zone: NgZone;
+  private rate = [];
+  private totalRate = 0;
+  private avg = 0;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userServices: UserServices, public postsService: PostServices) {
     var myUserId = userServices.fireAuth.currentUser.uid;
     this.displayUser(myUserId);
     this.listPosts(myUserId);
+    this.getAvg(myUserId);
     this.listRatingComments(myUserId);
+
   }
 
   ionViewDidLoad() {
@@ -46,21 +52,6 @@ export class ProfilePage {
       that.userDisplayName = snapshot.val().username || "No Name";
     })
   }
-
-  /*listPosts(theUserId) {
-    var that = this;
-    this.postsService.listCurrentUsersPosts(theUserId).then(snapshot => {
-      //empty this array first to avoid duplication of content when value changes in the database
-      //so every time there is a change in the database, empty the array, fetch fresh data from db
-      //this is because we are fetching data with on('value') inside listPostService()
-      that.userPostsLists.length = 0;
-      snapshot.forEach(function (childSnapshot) {
-        var data = childSnapshot.val();
-        data['key'] = childSnapshot.key;
-        that.userPostsLists.push(data);
-      });
-    });
-  }*/
 
   listPosts(theUserId) {
     this.zone = new NgZone({});
@@ -103,9 +94,33 @@ export class ProfilePage {
         snapshot.forEach(childSnapshot => {
           let data = childSnapshot.val();
           data['key'] = childSnapshot.key;
-          this.userPostsLists.push(data);
+          this.userServices.viewUser(childSnapshot.key).then(snapshot => {
+            data['name'] = snapshot.val().username || "No Name";
+            data['photo'] = snapshot.val().photo || "img/profile.png";
+            this.ratingComments.push(data);
+          })
         });
       });
+    });
+  }
+
+  getAvg(theUserId) {
+    this.zone = new NgZone({});
+    this.zone.run(() => {
+      this.postsService.ratingNode.child(theUserId).once('value').then((snapshot) => {
+        snapshot.forEach(childSnapshot => {
+          let rating = childSnapshot.val().rating;
+          this.rate.push(rating);
+        });
+        var length = this.rate.length;
+        for (var i = 0; i < length; i++) {
+          var ratings = this.rate.pop();
+          this.totalRate = this.totalRate + ratings;
+        }
+        this.avg = this.totalRate / length;
+        console.log(this.avg);
+      });
+
     });
   }
 

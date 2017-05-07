@@ -24570,3 +24570,7 @@ page-profile ul.rating li {
 page-profile ul.rating li ion-icon {
   font-size: 30px;
 }
+
+page-profile .rating {
+  pointer-events: none;
+}

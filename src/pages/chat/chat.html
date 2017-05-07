@@ -15,25 +15,25 @@
 
 
 <ion-content padding>
-      <div id="top-container">
-        <ion-card *ngFor="let item of chatList">
-    <ion-item>
-      <ion-avatar item-left>
-        <img src="{{item.photoURL}}">
-      </ion-avatar>
-      <h2>{{item.displayName}}</h2>
-       <p>{{item.time | date:'hh:mm'}}</p>
-    </ion-item>
-    <ion-card-content>
-    <p>{{item.message}}</p>
-  </ion-card-content>
-  </ion-card>
-      </div>
+  <div id="top-container">
+    <ion-card *ngFor="let item of chatList">
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="{{item.photoURL}}">
+        </ion-avatar>
+        <h2>{{item.displayName}}</h2>
+        <p>{{item.time | date:'hh:mm'}}</p>
+      </ion-item>
+      <ion-card-content>
+        <p>{{item.message}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
-      <ion-item id="textarea">
-        <ion-input type="text" [(ngModel)]="msg" placeholder="Type Your Message"></ion-input>
-        <button ion-button outline item-right (click)="uploadChat()">
+  <ion-item id="textarea">
+    <ion-input type="text" [(ngModel)]="msg" placeholder="Type Your Message"></ion-input>
+    <button ion-button outline item-right (click)="uploadChat()">
       Send
     </button>
-      </ion-item>
+  </ion-item>
 </ion-content>
