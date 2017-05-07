@@ -1,0 +1,19 @@
+page-comments {
+   .scroll-content{
+       overflow: hidden !important;
+   }
+
+   #top-container{
+        height: calc(100% - 98px);
+        overflow-y: scroll;
+        position: absolute;
+        width: 100%;
+   }
+    
+   #field{
+       padding: 0px;
+       position: fixed;
+       bottom: 0px;
+       margin : 5px;
+   }
+}

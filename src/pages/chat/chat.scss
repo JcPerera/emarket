@@ -1,0 +1,22 @@
+page-chat {
+   .scroll-content{
+       overflow: hidden !important;
+   }
+
+   #top-container{
+        height: calc(100% - 98px);
+        overflow-y: scroll;
+        position: absolute;
+        width: 96%;
+   }
+    
+   #textarea{
+       padding: 0px;
+       position: fixed;
+       bottom: 0px;
+       button{
+           margin-right: 5%;
+       }
+   }
+
+}

@@ -1,0 +1,85 @@
+<!--
+  Generated template for the Profile page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons end>
+      <button ion-button icon-only (click)="signOut()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>profile</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div padding>
+    <ion-segment [(ngModel)]="user">
+      <ion-segment-button value="profile">
+        Profile
+      </ion-segment-button>
+      <ion-segment-button value="posts">
+        Posts
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="user">
+    <ion-list *ngSwitchCase="'profile'">
+      <ion-card>
+        <ion-item>
+          <img class="avatar" src="{{userPhotoUrl}}">
+          <h2 align="center">{{userDisplayName}}</h2>
+        </ion-item>
+      </ion-card>
+      <div align="center">
+        <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"
+          nullable="false" (ngModelChange)="onModelChange($event)">
+        </rating>
+      </div>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'posts'">
+      <ion-list>
+        <ion-card *ngFor="let post of userPostsLists">
+          <div style="position: relative">
+            <ion-fab right top>
+              <button ion-fab mini class="fab-map">
+        <ion-icon name='arrow-dropdown'></ion-icon>
+      </button>
+              <ion-fab-list>
+                <button ion-fab><ion-icon name="hammer" (click)="editPost(post)"></ion-icon></button>
+                <button ion-fab><ion-icon name="trash" (click)="deletePost(post.key)"></ion-icon></button>
+              </ion-fab-list>
+            </ion-fab>
+          </div>
+          <ion-item>
+            <ion-avatar item-left>
+              <img src="{{userPhotoUrl}}">
+            </ion-avatar>
+            <h2>{{post.name}}</h2>
+          </ion-item>
+          <img src="{{post.postPhoto}}">
+          <ion-item>
+            <h1>{{post.title}}</h1>
+            <h2>{{post.category}}</h2>
+            <p>{{post.subCategory}}</p>
+          </ion-item>
+          <ion-card-content>
+            <p>{{post.body}}</p>
+          </ion-card-content>
+          <button ion-button icon-left clear small (click)="goToComments(post)">
+        <ion-icon name="text"></ion-icon>
+        <div>Comments</div>
+      </button>
+        </ion-card>
+      </ion-list>
+    </ion-list>
+  </div>
+</ion-content>
