@@ -14,9 +14,11 @@ import firebase from 'firebase';
 export class ChatServices {
 
 public chatNode: any;
+public historyNode: any;
+
   constructor(public http: Http) {
     this.chatNode = firebase.database().ref('chat');
-    console.log('Hello ChatServices Provider');
+    this.historyNode = firebase.database().ref('chat-history');    
   }
 
  

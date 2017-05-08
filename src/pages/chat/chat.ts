@@ -30,10 +30,10 @@ export class ChatPage {
     public userServices: UserServices,
     public chatServices: ChatServices) {
     this.sender = this.navParams.get('item');
-    if(this.sender.uid){
+    if (this.sender.uid) {
       this.user = this.sender.uid;
     }
-    else{
+    else {
       this.user = this.sender.key;
     }
     this.currentUserId = this.userServices.fireAuth.currentUser.uid;
@@ -46,7 +46,7 @@ export class ChatPage {
 
   ListChat() {
     this.zone = new NgZone({});
-    this.chatServices.chatNode.child(this.currentUserId).child(this.user).orderByChild("activity").on('value', snapshot => {
+    this.chatServices.chatNode.child(this.currentUserId).child(this.user).on('value', snapshot => {
       this.zone.run(() => {
         this.chatList.length = 0;
         snapshot.forEach(childSnapshot => {
@@ -78,11 +78,30 @@ export class ChatPage {
     });
   }
 
+  updateHistory() {
+    this.userServices.viewUser(this.user).then((snapshot) => {
+      this.chatServices.historyNode.child(this.currentUserId).child(this.user).set({
+        name: snapshot.val().username,
+        photo: snapshot.val().photo,
+        time: "time"
+      })
+    });
+
+    this.userServices.viewUser(this.currentUserId).then((snapshot) => {
+      this.chatServices.historyNode.child(this.user).child(this.currentUserId).set({
+        name: snapshot.val().username,
+        photo: snapshot.val().photo,
+        time: "time"
+      })
+    });
+
+  }
+
   uploadChat() {
     var chatRoom = this.chatServices.chatNode.child(this.currentUserId).child(this.user).push();
     var date = new Date().toString();
-    var activity:number;
-    activity = new Date().getTime().valueOf();  
+    var activity: number;
+    activity = new Date().getTime().valueOf();
     activity = 0 - activity;
     console.log(activity);
     chatRoom.set({
@@ -101,6 +120,7 @@ export class ChatPage {
     });
     console.log(date);
     this.msg = "";
+    this.updateHistory();
   }
 
 }
