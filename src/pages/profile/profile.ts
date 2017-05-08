@@ -27,7 +27,10 @@ export class ProfilePage {
   private avg = 0;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userServices: UserServices, public postsService: PostServices) {
+  constructor(public navCtrl: NavController, 
+  public navParams: NavParams, 
+  public userServices: UserServices, 
+  public postsService: PostServices) {
     var myUserId = userServices.fireAuth.currentUser.uid;
     this.displayUser(myUserId);
     this.listPosts(myUserId);
@@ -88,7 +91,7 @@ export class ProfilePage {
 
   listRatingComments(theUserId) {
     this.zone = new NgZone({});
-    this.postsService.ratingNode.child(theUserId).on('value', snapshot => {
+    this.postsService.ratingCommentNode.child(theUserId).on('value', snapshot => {
       this.zone.run(() => {
         this.ratingComments.length = 0;
         snapshot.forEach(childSnapshot => {

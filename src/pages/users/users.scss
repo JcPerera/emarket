@@ -1,3 +1,43 @@
 page-users {
+.avatar{
+       margin: auto;
+       border-radius: 500px;
+       height: 200px;
+       width: 200px;
+    }
 
+    button[fab].fab-map {
+      top: calc(100% - 35px);
+      z-index: 50;
+    }
+
+    ul {
+      padding: 0px;
+
+    &.rating li {
+      padding: 5px 10px !important;
+      background: none;
+      color: #ffb400;
+
+      ion-icon {
+        font-size: 30px;
+      }
+   }
+  }
+  
+   #top-container{
+        height: calc(100% - 98px);
+        position: absolute;
+        width: 96%;
+   }
+    
+   #textarea{
+       padding: 0px;
+       position: fixed;
+       bottom: 0px;
+       button{
+           margin-right: 5%;
+       }
+   }
+  
 }

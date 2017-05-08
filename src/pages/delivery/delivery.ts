@@ -17,7 +17,9 @@ import { DeliveryFormPage } from "../delivery-form/delivery-form";
 export class DeliveryPage {
   public usersLists = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userServices: UserServices) {
+  constructor(public navCtrl: NavController, 
+  public navParams: NavParams, 
+  public userServices: UserServices) {
     this.loadUsers();
   }
 

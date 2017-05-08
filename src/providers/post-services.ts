@@ -21,6 +21,7 @@ export class PostServices {
   private postReplyNode: any;
   public suggestionNode: any;
   public ratingNode: any;
+  public ratingCommentNode: any;
 
   constructor(public http: Http, public preloader: Preloader) {
     this.userNode = firebase.database().ref('users');
@@ -30,6 +31,8 @@ export class PostServices {
     this.fireRef = firebase.database().ref();
     this.suggestionNode = firebase.database().ref('Suggestions/Electronics/Computer');
     this.ratingNode = firebase.database().ref('user-rating');
+    this.ratingCommentNode = firebase.database().ref('rating-comments');
+    
   }
 
   viewPostService(postId: any) {

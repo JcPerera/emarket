@@ -24574,3 +24574,45 @@ page-profile ul.rating li ion-icon {
 page-profile .rating {
   pointer-events: none;
 }
+
+page-users .avatar {
+  margin: auto;
+  border-radius: 500px;
+  height: 200px;
+  width: 200px;
+}
+
+page-users button[fab].fab-map {
+  top: calc(100% - 35px);
+  z-index: 50;
+}
+
+page-users ul {
+  padding: 0px;
+}
+
+page-users ul.rating li {
+  padding: 5px 10px !important;
+  background: none;
+  color: #ffb400;
+}
+
+page-users ul.rating li ion-icon {
+  font-size: 30px;
+}
+
+page-users #top-container {
+  height: calc(100% - 98px);
+  position: absolute;
+  width: 96%;
+}
+
+page-users #textarea {
+  padding: 0px;
+  position: fixed;
+  bottom: 0px;
+}
+
+page-users #textarea button {
+  margin-right: 5%;
+}
