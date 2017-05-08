@@ -55,9 +55,6 @@ export class UsersPage {
     }
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UsersPage');
-  }
 
   listPosts(theUserId) {
     this.zone = new NgZone({});
@@ -71,11 +68,9 @@ export class UsersPage {
         });
       });
     });
-    this.postsService.usersPostNode.child(theUserId).off();
   }
 
   goToComments(key: any) {
-    this.postsService.usersPostNode.child(this.temp).off();
     this.navCtrl.push(CommentsPage, key);
   }
 
@@ -86,6 +81,7 @@ export class UsersPage {
         this.ratingComments.length = 0;
         snapshot.forEach(childSnapshot => {
           let data = childSnapshot.val();
+          console.log(data);
           data['key'] = childSnapshot.key;
           this.userServices.viewUser(childSnapshot.key).then(snapshot => {
             data['name'] = snapshot.val().username || "No Name";
@@ -99,7 +95,6 @@ export class UsersPage {
         });
       });
     });
-    this.postsService.ratingCommentNode.child(theUserId).off();
   }
 
   getAvg(theUserId) {
@@ -150,14 +145,12 @@ export class UsersPage {
   }
 
   goToChat() {
-    this.postsService.usersPostNode.child(this.temp).off();
     this.navCtrl.push(ChatPage, {
       item: this.userProfile
     });
   }
 
   goToDeliveryForm() {
-    this.postsService.usersPostNode.child(this.temp).off();
     this.navCtrl.push(DeliveryFormPage, {
       item: this.userProfile
     });

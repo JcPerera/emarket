@@ -27,10 +27,6 @@ export class SearchPage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage');
-  }
-
   getItems(ev: any) {
     // Reset items back to all of the items
     this.loadUsers();
@@ -47,11 +43,11 @@ export class SearchPage {
   }
 
   loadUsers() {
-    this.userServices.userProfile.on('value', snapshot => {
+    this.userServices.userProfile.once('value').then((snapshot) => {
       this.usersLists.length = 0;
       snapshot.forEach(childSnapshot => {
         let data = childSnapshot.val();
-        data['key'] = childSnapshot.key;
+        data['uid'] = childSnapshot.key;
         if (childSnapshot.key == this.currentUser) {
 
         }

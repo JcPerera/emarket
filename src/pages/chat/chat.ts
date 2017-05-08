@@ -35,17 +35,18 @@ export class ChatPage {
     }
     else {
       this.user = this.sender.key;
-    }
+    }   
+
     this.currentUserId = this.userServices.fireAuth.currentUser.uid;
     this.ListChat();
-  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatPage');
+    console.log(this.user);
+    console.log(this.currentUserId);
   }
 
   ListChat() {
     this.zone = new NgZone({});
+    this.chatServices.chatNode.child(this.currentUserId).child(this.user).off();
     this.chatServices.chatNode.child(this.currentUserId).child(this.user).on('value', snapshot => {
       this.zone.run(() => {
         this.chatList.length = 0;
@@ -98,12 +99,13 @@ export class ChatPage {
   }
 
   uploadChat() {
+    this.zone = new NgZone({});
+     this.zone.run(() => {
     var chatRoom = this.chatServices.chatNode.child(this.currentUserId).child(this.user).push();
     var date = new Date().toString();
     var activity: number;
     activity = new Date().getTime().valueOf();
     activity = 0 - activity;
-    console.log(activity);
     chatRoom.set({
       message: this.msg,
       sender: this.currentUserId,
@@ -118,9 +120,9 @@ export class ChatPage {
       time: date,
       activity: activity
     });
-    console.log(date);
     this.msg = "";
     this.updateHistory();
+     });
   }
 
 }
