@@ -22,6 +22,7 @@ export class ChatPage {
   private userPhotoUrl: any;
   private userDisplayName: any;
   private msg: any;
+  private user: any;
 
 
   constructor(public navCtrl: NavController,
@@ -29,6 +30,12 @@ export class ChatPage {
     public userServices: UserServices,
     public chatServices: ChatServices) {
     this.sender = this.navParams.get('item');
+    if(this.sender.uid){
+      this.user = this.sender.uid;
+    }
+    else{
+      this.user = this.sender.key;
+    }
     this.currentUserId = this.userServices.fireAuth.currentUser.uid;
     this.ListChat();
   }
@@ -39,7 +46,7 @@ export class ChatPage {
 
   ListChat() {
     this.zone = new NgZone({});
-    this.chatServices.chatNode.child(this.currentUserId).child(this.sender.key).on('value', snapshot => {
+    this.chatServices.chatNode.child(this.currentUserId).child(this.user).orderByChild("activity").on('value', snapshot => {
       this.zone.run(() => {
         this.chatList.length = 0;
         snapshot.forEach(childSnapshot => {
@@ -56,7 +63,7 @@ export class ChatPage {
             })
           }
           else {
-            this.userServices.viewUser(this.sender.key).then(snapshot => {
+            this.userServices.viewUser(this.user).then(snapshot => {
               this.userPhotoUrl = snapshot.val().photo;
               this.userDisplayName = snapshot.val().username;
               data['photoURL'] = this.userPhotoUrl;
@@ -72,7 +79,7 @@ export class ChatPage {
   }
 
   uploadChat() {
-    var chatRoom = this.chatServices.chatNode.child(this.currentUserId).child(this.sender.key).push();
+    var chatRoom = this.chatServices.chatNode.child(this.currentUserId).child(this.user).push();
     var date = new Date().toString();
     var activity:number;
     activity = new Date().getTime().valueOf();  
@@ -85,7 +92,7 @@ export class ChatPage {
       activity: activity
     });
 
-    var chatRoom2 = this.chatServices.chatNode.child(this.sender.key).child(this.currentUserId).push();
+    var chatRoom2 = this.chatServices.chatNode.child(this.user).child(this.currentUserId).push();
     chatRoom2.set({
       message: this.msg,
       sender: this.currentUserId,

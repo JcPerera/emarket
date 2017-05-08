@@ -3,6 +3,10 @@ import { NavController, NavParams, ViewController, LoadingController, AlertContr
 import { PostServices } from '../../providers/post-services';
 import { UserServices } from '../../providers/user-services';
 
+import { ProfilePage } from "../profile/profile";
+import { UsersPage } from "../users/users";
+
+
 /*
   Generated class for the Comments page.
 
@@ -83,5 +87,16 @@ export class CommentsPage {
         alert.present();
       })
     });
+  }
+
+  goToUser(post){
+    if(post.uid==this.userId.uid){
+      this.navCtrl.push(ProfilePage);
+    }
+    else{
+      this.navCtrl.push(UsersPage,{
+        item: post
+      })
+    }
   }
 }

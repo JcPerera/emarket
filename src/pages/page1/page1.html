@@ -13,7 +13,7 @@
 </ion-header>
 <ion-content padding>
   <ion-card *ngFor="let post of userPostsLists">
-    <ion-item>
+    <ion-item (click)="goToUsers(post)">
       <ion-avatar item-left>
         <img src="{{post.photo}}">
       </ion-avatar>

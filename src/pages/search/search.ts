@@ -62,7 +62,7 @@ export class SearchPage {
     })
   }
 
-  deliveryForm(user) {
+  goToUsers(user) {
     this.navCtrl.push(UsersPage, {
       item: user
     });

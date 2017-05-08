@@ -12,7 +12,7 @@
 <ion-content>
   <div id="top-container">
     <ion-card *ngFor="let post of postReplyLists">
-      <ion-item>
+      <ion-item (click)="goToUser(post)">
         <ion-avatar item-left>
           <img src="{{post.photo}}">
         </ion-avatar>

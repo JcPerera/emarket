@@ -32,7 +32,8 @@
         <ion-card>
           <ion-item>
             <img class="avatar" src="{{userProfile.photo}}">
-            <h2 align="center">{{userDisplayName}}</h2>
+            <h2 align="center">{{userProfile.username}}</h2>
+            <h2 *ngIf="!visible" align="center">{{userProfile.name}}</h2>
           </ion-item>
         </ion-card>
         <ion-row>
@@ -43,7 +44,7 @@
       </button>
           </ion-col>
           <ion-col>
-           
+
           </ion-col>
           <ion-col>
             <button ion-button icon-left outline (click)="goToDeliveryForm()">
@@ -87,7 +88,9 @@
             <ion-avatar item-left>
               <img src="{{userProfile.photo}}">
             </ion-avatar>
-            <h2>{{post.name}}</h2>
+            <h2>{{userProfile.username}}</h2>
+            <h2 *ngIf="!visible">{{userProfile.name}}</h2>
+            
           </ion-item>
           <img src="{{post.postPhoto}}">
           <ion-item>

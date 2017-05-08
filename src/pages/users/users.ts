@@ -27,6 +27,8 @@ export class UsersPage {
   private avg = 0;
   private currentUser: any;
   private comment: any;
+  private visible: boolean;
+  private temp: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -35,10 +37,22 @@ export class UsersPage {
   ) {
     this.currentUser = this.userServices.fireAuth.currentUser.uid;
     this.userProfile = this.navParams.get('item');
-    this.listPosts(this.userProfile.key);
-    this.listPosts(this.userProfile.key);
-    this.getAvg(this.userProfile.key);
-    this.listRatingComments(this.userProfile.key);
+    this.temp = this.userProfile.uid;
+    if (this.userProfile.uid) {
+      console.log('1st ' + this.userProfile.uid)
+      this.listPosts(this.userProfile.uid);
+      this.listPosts(this.userProfile.uid);
+      this.getAvg(this.userProfile.uid);
+      this.listRatingComments(this.userProfile.uid);
+    }
+    else {
+      this.visible = true;
+      console.log('2nd ' + this.userProfile.key)
+      this.listPosts(this.userProfile.key);
+      this.listPosts(this.userProfile.key);
+      this.getAvg(this.userProfile.key);
+      this.listRatingComments(this.userProfile.key);
+    }
   }
 
   ionViewDidLoad() {
@@ -57,9 +71,11 @@ export class UsersPage {
         });
       });
     });
+    this.postsService.usersPostNode.child(theUserId).off();
   }
 
   goToComments(key: any) {
+    this.postsService.usersPostNode.child(this.temp).off();
     this.navCtrl.push(CommentsPage, key);
   }
 
@@ -78,12 +94,12 @@ export class UsersPage {
               this.ratingComments.push(data);
             }
             else {
-
             }
           })
         });
       });
     });
+    this.postsService.ratingCommentNode.child(theUserId).off();
   }
 
   getAvg(theUserId) {
@@ -107,27 +123,41 @@ export class UsersPage {
   }
 
   onModelChange(evt: any) {
-    console.log(evt);
-    this.postsService.ratingNode.child(this.userProfile.key).child(this.currentUser).set({
-      rating: evt
-    })
+    if (this.userProfile.uid) {
+      this.postsService.ratingNode.child(this.userProfile.uid).child(this.currentUser).set({
+        rating: evt
+      })
+    }
+    else {
+      this.postsService.ratingNode.child(this.userProfile.key).child(this.currentUser).set({
+        rating: evt
+      })
+    }
   }
 
   rateComment() {
-    this.postsService.ratingCommentNode.child(this.userProfile.key).child(this.currentUser).set({
-      comment: this.comment
-    })
-
-    this.comment="";
+    if (this.userProfile.uid) {
+      this.postsService.ratingCommentNode.child(this.userProfile.uid).child(this.currentUser).set({
+        comment: this.comment
+      })
+    }
+    else {
+      this.postsService.ratingCommentNode.child(this.userProfile.key).child(this.currentUser).set({
+        comment: this.comment
+      })
+    }
+    this.comment = "";
   }
 
   goToChat() {
+    this.postsService.usersPostNode.child(this.temp).off();
     this.navCtrl.push(ChatPage, {
       item: this.userProfile
     });
   }
 
   goToDeliveryForm() {
+    this.postsService.usersPostNode.child(this.temp).off();
     this.navCtrl.push(DeliveryFormPage, {
       item: this.userProfile
     });
