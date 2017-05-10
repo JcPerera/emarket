@@ -17,6 +17,7 @@ import { UsersPage } from "../pages/users/users";
 import { RecentPage } from "../pages/recent/recent";
 import { ProfilePage } from '../pages/profile/profile';
 import { SearchPage } from "../pages/search/search";
+import { MapPage } from '../pages/map/map';
 
 
 import { UserServices } from '../providers/user-services';
@@ -41,7 +42,8 @@ import { ChatServices } from "../providers/chat-services";
     DeliveryFormPage,
     UsersPage,
     RecentPage,
-    SearchPage
+    SearchPage,
+    MapPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -62,7 +64,8 @@ import { ChatServices } from "../providers/chat-services";
     DeliveryFormPage,
     UsersPage,
     RecentPage,
-    SearchPage
+    SearchPage,
+    MapPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},UserServices,PostServices,Preloader,ChatServices]
 })

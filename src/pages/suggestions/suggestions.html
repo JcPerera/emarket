@@ -5,14 +5,30 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Suggestions</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-card *ngFor="let post of companyPost">
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="{{post.uploadedImage}}">
+      </ion-avatar>
+      <h2>{{post.cname}}</h2>
+    </ion-item>
+    <ion-item>
+      <p>{{post.email}}</p>
+      <p>{{post.telephone}}</p>
+    </ion-item>
+    <ion-card-content>
+      <p>{{post.description}}</p>
+    </ion-card-content>
+    <button ion-button full (click)="goToMap(post)"> View Map </button>
+  </ion-card>
 </ion-content>

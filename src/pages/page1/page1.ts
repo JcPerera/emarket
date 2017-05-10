@@ -6,6 +6,7 @@ import { UserServices } from '../../providers/user-services';
 import { CommentsPage } from '../comments/comments';
 import { UsersPage } from "../users/users";
 import { ProfilePage } from "../profile/profile";
+import { SuggestionsPage } from '../suggestions/suggestions';
 
 
 @Component({
@@ -64,7 +65,12 @@ export class Page1 {
         item: post
       });
     }
+  }
 
+  goToSuggestions(post){
+    this.navCtrl.push(SuggestionsPage,{
+      item: post
+    });
   }
 
 }

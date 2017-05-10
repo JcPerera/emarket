@@ -23,15 +23,17 @@ export class PostServices {
   public ratingNode: any;
   public ratingCommentNode: any;
 
+
   constructor(public http: Http, public preloader: Preloader) {
     this.userNode = firebase.database().ref('users');
     this.postsNode = firebase.database().ref('posts');
     this.usersPostNode = firebase.database().ref('user-posts');
     this.postReplyNode = firebase.database().ref('post-reply');
     this.fireRef = firebase.database().ref();
-    this.suggestionNode = firebase.database().ref('Suggestions/Electronics/Computer');
+    this.suggestionNode = firebase.database().ref('WebPosts');
     this.ratingNode = firebase.database().ref('user-rating');
     this.ratingCommentNode = firebase.database().ref('rating-comments');
+
     
   }
 

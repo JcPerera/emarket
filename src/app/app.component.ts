@@ -8,8 +8,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { DeliveryPage } from "../pages/delivery/delivery";
 import { RecentPage } from "../pages/recent/recent";
 import { SearchPage } from "../pages/search/search";
-
-
+import { MapPage } from '../pages/map/map';
 
 import firebase from 'firebase';
 
@@ -45,10 +44,6 @@ export class MyApp {
       { title: 'Delivery', component: DeliveryPage },
       { title: 'Chat', component: RecentPage },
       { title: 'Search', component: SearchPage }
-      
-      
-
-
     ];
   }
 

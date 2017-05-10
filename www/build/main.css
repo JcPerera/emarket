@@ -24545,6 +24545,10 @@ page-login .newAcc {
   margin-top: 50px;
 }
 
+page-map #map {
+  height: 300px;
+}
+
 page-profile .avatar {
   margin: auto;
   border-radius: 500px;
@@ -24573,6 +24577,11 @@ page-profile ul.rating li ion-icon {
 
 page-profile .rating {
   pointer-events: none;
+}
+
+page-suggestions #map {
+  height: 250px;
+  width: 100px;
 }
 
 page-users .avatar {
