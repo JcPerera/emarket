@@ -1,5 +1,14 @@
 page-delivery-form {
-    #map {
-        height: 300px;
+    #homeInputContainer{
+        position: absolute;
+        width: 78%;
+        margin-left:2%;
+        margin-top:20px;  
     }
+    
+   #map {
+        width: 100%;
+        height: 450px;
+        z-index: -100;
+      }
 }

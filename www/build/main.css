@@ -24537,8 +24537,17 @@ page-comments #field {
   margin: 5px;
 }
 
+page-delivery-form #homeInputContainer {
+  position: absolute;
+  width: 78%;
+  margin-left: 2%;
+  margin-top: 20px;
+}
+
 page-delivery-form #map {
-  height: 300px;
+  width: 100%;
+  height: 450px;
+  z-index: -100;
 }
 
 page-login .newAcc {
