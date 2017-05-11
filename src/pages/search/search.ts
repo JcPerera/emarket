@@ -43,7 +43,7 @@ export class SearchPage {
   }
 
   loadUsers() {
-    this.userServices.userProfile.once('value').then((snapshot) => {
+    this.userServices.userProfile.on('value', snapshot => {
       this.usersLists.length = 0;
       snapshot.forEach(childSnapshot => {
         let data = childSnapshot.val();

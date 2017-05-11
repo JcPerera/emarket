@@ -32,6 +32,22 @@ export class Page1 {
     this.ListPosts();
   }
 
+getItems(ev: any) {
+    // Reset items back to all of the items
+    this.ListPosts();
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.userPostsLists = this.userPostsLists.filter((item) => {
+        return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
+
+ 
   goToPost() {
     this.postsService.postsNode.orderByChild("activity").off();
     this.navCtrl.push(PostPage);

@@ -7,6 +7,8 @@ import { NavController, NavParams } from 'ionic-angular';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+declare let google;
+
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html'

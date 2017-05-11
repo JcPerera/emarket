@@ -12,6 +12,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-card *ngFor="let post of userPostsLists">
     <ion-item (click)="goToUsers(post)">
       <ion-avatar item-left>
