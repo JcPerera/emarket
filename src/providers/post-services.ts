@@ -30,7 +30,7 @@ export class PostServices {
     this.usersPostNode = firebase.database().ref('user-posts');
     this.postReplyNode = firebase.database().ref('post-reply');
     this.fireRef = firebase.database().ref();
-    this.suggestionNode = firebase.database().ref('WebPosts');
+    this.suggestionNode = firebase.database().ref('webPosts');
     this.ratingNode = firebase.database().ref('user-rating');
     this.ratingCommentNode = firebase.database().ref('rating-comments');
 

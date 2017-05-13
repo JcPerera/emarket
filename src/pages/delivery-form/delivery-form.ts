@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
 import { Geolocation } from '@ionic-native/geolocation';
-import { ElementRef } from '@angular/core';
 import { UserServices } from '../../providers/user-services';
 import { Preloader } from '../../providers/preloader';
 /*

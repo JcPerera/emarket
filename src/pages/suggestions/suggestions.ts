@@ -23,29 +23,27 @@ export class SuggestionsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public postServices: PostServices) {
     this.post = this.navParams.get('item');
     this.getSuggestions();
-  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DeliveryFormPage');
   }
 
   getSuggestions() {
     this.postServices.suggestionNode.once('value').then((snapshot) => {
-      var data;
       snapshot.forEach(childSnapshot => {
-        var key = childSnapshot.key;
-        var cat = childSnapshot.val().catogeries;
-        var name = childSnapshot.val().cname;
-        cat.forEach(result => {
-          if (result.subCat == this.post.subCategory) {
-            this.postServices.suggestionNode.child(key).once('value').then((result) => {
-              var company = result.val();
-              this.companyPost.push(company);
-            })
-          }
-        })
+        var key1 = childSnapshot.key;
+        childSnapshot.forEach(child => {
+          var key2 = child.key;
+          var cat = child.val().catogeries;
+          cat.forEach(result => {
+            if (result.subCat == this.post.subCategory) {
+              this.postServices.suggestionNode.child(key1).child(key2).once('value').then((result) => {
+                var company = result.val();
+                this.companyPost.push(company);
+              });
+            }
+          });
+        });
       })
-    })
+    });
   }
 
   goToMap(post) {

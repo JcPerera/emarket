@@ -3,6 +3,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { Geolocation } from '@ionic-native/geolocation';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 
 import { Page1 } from '../pages/page1/page1';
@@ -68,6 +69,6 @@ import { ChatServices } from "../providers/chat-services";
     SearchPage,
     MapPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},UserServices,PostServices,Preloader,ChatServices,Geolocation]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},UserServices,PostServices,Preloader,ChatServices,Geolocation,EmailComposer]
 })
 export class AppModule {}
