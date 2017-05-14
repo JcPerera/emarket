@@ -49,12 +49,10 @@ getItems(ev: any) {
 
  
   goToPost() {
-    this.postsService.postsNode.orderByChild("activity").off();
     this.navCtrl.push(PostPage);
   }
 
   goToComments(key: any) {
-    this.postsService.postsNode.orderByChild("activity").off();
     this.navCtrl.push(CommentsPage, key);
   }
 
@@ -73,7 +71,6 @@ getItems(ev: any) {
   }
 
   goToUsers(post) {
-    this.postsService.postsNode.orderByChild("activity").off();
     if (post.uid == this.userId.uid) {
       this.navCtrl.push(ProfilePage)
     } else {

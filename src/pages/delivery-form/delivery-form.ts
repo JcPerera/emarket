@@ -84,6 +84,8 @@ export class DeliveryFormPage {
       destination: this.homeMap.to,
       travelMode: 'DRIVING'
     }, function (response, status) {
+        console.log(status);
+        console.log(response);
       if (status == 'OK') {
         directionDisplay.setDirections(response);
       } else {
@@ -101,7 +103,6 @@ export class DeliveryFormPage {
   }
 
   homeMapSearchBtn() {
-    console.log("hi");
     this.calcDisplayRoute(this.directionsService, this.directionsDisplay);
   }
 
