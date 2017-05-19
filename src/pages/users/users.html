@@ -33,7 +33,7 @@
           <ion-item>
             <img class="avatar" src="{{userProfile.photo}}">
             <h2 align="center">{{userProfile.username}}</h2>
-            <h2 *ngIf="!visible" align="center">{{userProfile.name}}</h2>
+            <h2 *ngIf="visible" align="center">{{userProfile.name}}</h2>
           </ion-item>
         </ion-card>
         <ion-row>
@@ -89,7 +89,7 @@
               <img src="{{userProfile.photo}}">
             </ion-avatar>
             <h2>{{userProfile.username}}</h2>
-            <h2 *ngIf="!visible">{{userProfile.name}}</h2>
+            <h2 *ngIf="visible">{{userProfile.name}}</h2>
             
           </ion-item>
           <img src="{{post.postPhoto}}">

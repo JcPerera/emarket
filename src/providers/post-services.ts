@@ -30,7 +30,7 @@ export class PostServices {
     this.usersPostNode = firebase.database().ref('user-posts');
     this.postReplyNode = firebase.database().ref('post-reply');
     this.fireRef = firebase.database().ref();
-    this.suggestionNode = firebase.database().ref('webPosts');
+    this.suggestionNode = firebase.database().ref('verifiedPosts');
     this.ratingNode = firebase.database().ref('user-rating');
     this.ratingCommentNode = firebase.database().ref('rating-comments');
 
@@ -267,7 +267,6 @@ export class PostServices {
   }
 
   delete(userId: any, postId: any) {
-    this.preloader.displayAlert('Delete', 'Are You Sure, You Want to Delete This Post !')
     this.usersPostNode.child(userId).child(postId).remove();
     this.postsNode.child(postId).remove();
     this.postReplyNode.child(postId).remove();

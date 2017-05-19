@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { UserServices } from '../../providers/user-services';
 import { PostServices } from '../../providers/post-services';
 
@@ -25,12 +25,14 @@ export class ProfilePage {
   private rate = [];
   private totalRate = 0;
   private avg = 0;
+  private user: any;
 
-
-  constructor(public navCtrl: NavController, 
-  public navParams: NavParams, 
-  public userServices: UserServices, 
-  public postsService: PostServices) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public userServices: UserServices,
+    public alertCtrl: AlertController,
+    public postsService: PostServices) {
+    this.user = 'profile';
     var myUserId = userServices.fireAuth.currentUser.uid;
     this.displayUser(myUserId);
     this.listPosts(myUserId);
@@ -72,7 +74,26 @@ export class ProfilePage {
 
   deletePost(postid: any) {
     var myUserId = this.userServices.fireAuth.currentUser.uid;
-    this.postsService.delete(myUserId, postid);
+    let confirm = this.alertCtrl.create({
+      title: 'Delete',
+      message: 'Are you sure you want to delete this post ?',
+      buttons: [
+        {
+          text: 'Disagree',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Agree',
+          handler: () => {
+            this.postsService.delete(myUserId, postid);
+          }
+        }
+      ]
+    });
+    confirm.present();
+
   }
 
   goToComments(key: any) {

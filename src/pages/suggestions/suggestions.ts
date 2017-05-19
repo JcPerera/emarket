@@ -26,23 +26,21 @@ export class SuggestionsPage {
 
   }
 
+
   getSuggestions() {
     this.postServices.suggestionNode.once('value').then((snapshot) => {
       snapshot.forEach(childSnapshot => {
-        var key1 = childSnapshot.key;
-        childSnapshot.forEach(child => {
-          var key2 = child.key;
-          var cat = child.val().catogeries;
-          cat.forEach(result => {
-            if (result.subCat == this.post.subCategory) {
-              this.postServices.suggestionNode.child(key1).child(key2).once('value').then((result) => {
-                var company = result.val();
-                this.companyPost.push(company);
-              });
-            }
-          });
+        var key2 = childSnapshot.key;
+        var cat = childSnapshot.val().catogeries;
+        cat.forEach(result => {
+          if (result.subCat == this.post.subCategory) {
+            this.postServices.suggestionNode.child(key2).once('value').then((result) => {
+              var company = result.val();
+              this.companyPost.push(company);
+            });
+          }
         });
-      })
+      });
     });
   }
 

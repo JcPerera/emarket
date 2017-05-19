@@ -26,8 +26,8 @@ export class PostPage {
   public cameraImage: String;
   public username: string;
   public profilePic: any;
-  public subArray = ["Phones", "Tv"];
-  public catArray = ["Electronics", "Vehicles", "Property", "Fashion", "Other"];
+  public subArray = ['TVs', 'Mobiles', 'Laptops', 'Speakers'];
+  public catArray = ["Electronics", "Home appliances", "Clothes", "Others"];
   public post: any;
   public visible: Boolean;
   public flag = false;
@@ -47,21 +47,19 @@ export class PostPage {
 
   }
 
+
   updateSelectedValue(event: string): void {
     if (event == "Electronics") {
-      this.subArray = ["Phones", "Tv"];
+      this.subArray = ['TVs', 'Mobiles', 'Laptops', 'Speakers'];
     }
-    else if (event == "Vehicles") {
-      this.subArray = ["Car", "Van", "Bike"];
+    else if (event == "Home appliances") {
+      this.subArray = ['CupBoards', 'Beds', 'Tables', 'Mugs'];
     }
-    else if (event == "Property") {
-      this.subArray = ["House", "Land"];
+    else if (event == "Clothes") {
+      this.subArray = ['Shirts', 'T Shirts', 'Frocks', 'Blouse', 'Bags', 'Footware'];
     }
-    else if (event == "Fashion") {
-      this.subArray = ["Accessories", "Cloths"];
-    }
-    else if (event == "Other") {
-      this.subArray = ["Not Specified"];
+    else if (event == "Others") {
+      this.subArray = ['Books', 'Other'];
     }
   }
 
@@ -81,8 +79,26 @@ export class PostPage {
           resolve(this.cameraImage);
         });
 
-        this.flag = true;
+      this.flag = true;
     });
+  }
+
+  checkValidNew() {
+    if (this.category && this.subArray && this.title && this.cameraImage && this.postBody) {
+      this.addNewPost();
+    }
+    else {
+      this.preloader.displayAlert('Error', 'One or More Fields are Empty');
+    }
+  }
+
+  checkValidEdit() {
+    if (this.category && this.subArray && this.title && this.cameraImage && this.postBody) {
+      this.editUserPost();
+    }
+    else {
+      this.preloader.displayAlert('Error', 'One or More Fields are Empty');
+    }
   }
 
   addNewPost() {
@@ -90,7 +106,25 @@ export class PostPage {
     this.userServices.viewUser(this.userId.uid).then(snapshot => {
       that.profilePic = snapshot.val().photo || "img/profile.png";
       that.username = snapshot.val().username || "No Name";
-      this.postsService.createPostService(that.userId.uid, that.postBody, that.username, that.profilePic, that.category, that.subCategory, that.title, that.cameraImage, that.flag);
+      let confirm = this.alertCtrl.create({
+        title: 'Add new Post',
+        message: 'Are you Sure you want to add this Post ?',
+        buttons: [
+          {
+            text: 'Disagree',
+            handler: () => {
+              console.log('Disagree clicked');
+            }
+          },
+          {
+            text: 'Agree',
+            handler: () => {
+              this.postsService.createPostService(that.userId.uid, that.postBody, that.username, that.profilePic, that.category, that.subCategory, that.title, that.cameraImage, that.flag);
+            }
+          }
+        ]
+      });
+      confirm.present();
     })
   }
 
@@ -99,9 +133,29 @@ export class PostPage {
     this.userServices.viewUser(this.userId.uid).then(snapshot => {
       that.profilePic = snapshot.val().photo || "img/profile.png";
       that.username = snapshot.val().username || "No Name";
-      this.postsService.editPostService(that.userId.uid, that.postBody, that.username, that.profilePic, that.category, that.subCategory, that.title, that.cameraImage, this.post.key, this.flag);
+      let confirm = this.alertCtrl.create({
+        title: 'Edit This Post',
+        message: 'Are you sure you want to edit this post ?',
+        buttons: [
+          {
+            text: 'Disagree',
+            handler: () => {
+              console.log('Disagree clicked');
+            }
+          },
+          {
+            text: 'Agree',
+            handler: () => {
+              this.postsService.editPostService(that.userId.uid, that.postBody, that.username, that.profilePic, that.category, that.subCategory, that.title, that.cameraImage, this.post.key, this.flag);
+              console.log('Agree clicked');
+            }
+          }
+        ]
+      });
+      confirm.present();
     })
   }
+
 
   checkEditable(id: any) {
     if (id) {

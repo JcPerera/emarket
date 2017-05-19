@@ -29,12 +29,8 @@
     <ion-input [(ngModel)]="bname" type="text"></ion-input>
   </ion-item>
 
-  <ion-item>
-    <ion-label fixed>BuyerContact No</ion-label>
-    <ion-input [(ngModel)]="btel" type="tel" pattern="[0-9]*" maxlength="10" ></ion-input>
-  </ion-item>
 
-<!--
+  <!--
   <input id="origin-input" class="controls" type="text"
          placeholder="Enter an origin location" [(ngModel)]="start">
 
@@ -54,26 +50,11 @@
   <div id="map"></div>
 -->
 
-<ion-row  id="homeInputContainer">
-    <ion-item>
-      <ion-label fixed>From</ion-label>
-      <ion-input [(ngModel)]="homeMap.from" type="text" value=""></ion-input>      
-    </ion-item>
-    <ion-item>
-      <ion-label fixed>To</ion-label>
-      <ion-input [(ngModel)]="homeMap.to" type="text"></ion-input>
-    </ion-item>
-      <button (click)="homeMapSearchBtn()" ion-button icon-right outline>Pick</button>
-</ion-row>  
-<div #map id="map"> </div>
-
-
-<ion-item>
+  <ion-item>
     <ion-label fixed>weigh</ion-label>
-    <ion-input [(ngModel)]="weigh" type="number" ></ion-input>
-</ion-item>
+    <ion-input [(ngModel)]="weigh" type="number"></ion-input>
+  </ion-item>
 
-<ion-list>
   <ion-item>
     <ion-label>Vehicle type</ion-label>
     <ion-select [(ngModel)]="Vehicle_type">
@@ -82,14 +63,23 @@
       <ion-option value="truk">Truk</ion-option>
     </ion-select>
   </ion-item>
-</ion-list>
 
-<ion-item>
+  <ion-item>
+    <ion-label fixed>From</ion-label>
+    <ion-input [(ngModel)]="homeMap.from" type="text" value=""></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label fixed>To</ion-label>
+    <ion-input [(ngModel)]="homeMap.to" type="text"></ion-input>
+  </ion-item>
+  <button (click)="homeMapSearchBtn()" ion-button icon-right outline>Pick</button>
+  <div #map id="map"> </div>
+  <ion-item>
     <ion-label fixed>Fee</ion-label>
-    <ion-input [(ngModel)]="fee" type="text" pattern="[0-9]*" value=""></ion-input>
-</ion-item>
+    <ion-label>{{fee}}</ion-label>
+  </ion-item>
 
-<button ion-button block (click)="sendData()">Add Deliver</button>
+  <button ion-button block (click)="sendData()">Add Deliver</button>
 
 
 </ion-content>

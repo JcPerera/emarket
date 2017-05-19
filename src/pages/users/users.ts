@@ -29,12 +29,14 @@ export class UsersPage {
   private comment: any;
   private visible: boolean;
   private temp: any;
+  private user: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public userServices: UserServices,
     public postsService: PostServices
   ) {
+    this.user = 'profile';
     this.currentUser = this.userServices.fireAuth.currentUser.uid;
     this.userProfile = this.navParams.get('item');
     this.temp = this.userProfile.uid;

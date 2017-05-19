@@ -42,7 +42,7 @@ getItems(ev: any) {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.userPostsLists = this.userPostsLists.filter((item) => {
-        return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return ((item.title.toLowerCase().indexOf(val.toLowerCase()) > -1)||(item.subCategory.toLowerCase().indexOf(val.toLowerCase()) > -1));
       })
     }
   }

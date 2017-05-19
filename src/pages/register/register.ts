@@ -41,7 +41,6 @@ export class RegisterPage {
   // Register New Users Function 
   signUserUp() {
     this.userServices.signUpUser(this.emailField, this.passwordField, this.displayName, this.fname, this.lname, this.address, this.cameraImage);
-    this.navCtrl.pop();
   }
 
   showForgotPassword() {

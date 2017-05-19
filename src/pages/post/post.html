@@ -48,7 +48,7 @@
   <ion-item>
     <ion-input type="text" placeholder="Type Your Post Here" [(ngModel)]="postBody"></ion-input>
   </ion-item>
-  <button ion-button primary full (click)="addNewPost()" *ngIf="!visible">Post</button>
-  <button ion-button primary full (click)="editUserPost()" *ngIf="visible">Update Post</button>
+  <button ion-button primary full (click)="checkValidNew()" *ngIf="!visible">Post</button>
+  <button ion-button primary full (click)="checkValidEdit()" *ngIf="visible">Update Post</button>
 
 </ion-content>
